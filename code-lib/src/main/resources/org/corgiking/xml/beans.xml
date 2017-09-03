@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="user" class="org.corgiking.xml.demo.beans.User">
+		<field id="name" value="CorgiKing" type="java.lang.String"/>
+		<field id="age" value="25" type="java.lang.Integer"/>
+	</bean>
+	<bean id="userDao" class="org.corgiking.xml.demo.beans.UserDao"></bean>
+	<bean id="userService" class="org.corgiking.xml.demo.beans.UserService"></bean>
+	<bean id="userApi" class="org.corgiking.xml.demo.beans.UserApi"></bean>
+</beans>

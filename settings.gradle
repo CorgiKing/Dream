@@ -1,2 +1,3 @@
-
-include "my-lib", "product","code-lib"
+include "my-lib"
+include "product"
+include "code-lib"

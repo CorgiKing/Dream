@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+	<people status="学生" id="xiaoming">
+		<name>小明</name>
+		<sex>男</sex>
+		<age>12</age>
+		<phone>123456</phone>
+	</people>
+	<people status="学生">
+		<name>小红</name>
+		<sex>女</sex>
+		<age>11</age>
+		<phone>123457</phone>
+	</people>
+	<people status="老师">
+		<name>小李</name>
+		<sex>未知</sex>
+		<age>13</age>
+		<phone>123458</phone>
+	</people>
+</group>

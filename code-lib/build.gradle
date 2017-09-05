@@ -21,6 +21,9 @@ dependencies {
     //解析XML:dom4j+xpath
     compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
     compile group: 'jaxen', name: 'jaxen', version: '1.1.6'
+    
+    //@Data就不用写get,set方法了
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
 }
 
 test {

@@ -1,4 +1,4 @@
-package org.corgiking.proxy.static_proxy;
+package org.corgiking.design.proxy.static_proxy;
 
 public class DellComputer implements Computer{
 	

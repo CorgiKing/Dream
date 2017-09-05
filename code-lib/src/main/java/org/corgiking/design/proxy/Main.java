@@ -1,7 +1,7 @@
-package org.corgiking.proxy;
+package org.corgiking.design.proxy;
 
-import org.corgiking.proxy.static_proxy.DellComputer;
-import org.corgiking.proxy.static_proxy.DellComputerProxy;
+import org.corgiking.design.proxy.static_proxy.DellComputer;
+import org.corgiking.design.proxy.static_proxy.DellComputerProxy;
 
 public class Main {
 

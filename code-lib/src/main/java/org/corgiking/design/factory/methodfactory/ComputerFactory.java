@@ -1,6 +1,6 @@
 package org.corgiking.design.factory.methodfactory;
 
-import org.corgiking.design.factory.Computer;
+import org.corgiking.design.factory.product.Computer;
 
 public interface ComputerFactory {
 	

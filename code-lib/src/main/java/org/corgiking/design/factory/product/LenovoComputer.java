@@ -1,9 +1,9 @@
-package org.corgiking.design.factory;
+package org.corgiking.design.factory.product;
 
 public class LenovoComputer implements Computer {
 
 	@Override
-	public void produce() {
+	public void say() {
 		System.out.println("联想电脑");
 	}
 

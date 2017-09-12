@@ -1,8 +1,8 @@
 package org.corgiking.design.factory.simplefactory;
 
-import org.corgiking.design.factory.Computer;
-import org.corgiking.design.factory.DellComputer;
-import org.corgiking.design.factory.LenovoComputer;
+import org.corgiking.design.factory.product.Computer;
+import org.corgiking.design.factory.product.DellComputer;
+import org.corgiking.design.factory.product.LenovoComputer;
 
 public class SimpleComputerFactory {
 	

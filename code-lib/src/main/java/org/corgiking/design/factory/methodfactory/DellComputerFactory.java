@@ -1,6 +1,6 @@
 package org.corgiking.design.factory.methodfactory;
 
-import org.corgiking.design.factory.DellComputer;
+import org.corgiking.design.factory.product.DellComputer;
 
 public class DellComputerFactory implements ComputerFactory {
 

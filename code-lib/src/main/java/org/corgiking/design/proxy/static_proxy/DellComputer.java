@@ -10,6 +10,6 @@ public class DellComputer implements Computer{
 	
 	@Override
 	public void produce(){
-		System.out.println("生产 "+brand + " 电脑");
+		System.out.println("生产 "+brand + " 电脑"+this);
 	}
 }

@@ -1,24 +1,23 @@
-package org.corgiking.design.proxy.dynamic_proxy;
+package org.corgiking.design.proxy.dynamic_proxy_jdk;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public abstract class AbstractDynamicProxy<T> implements InvocationHandler {
+public abstract class AbstractDynamicProxy implements InvocationHandler {
 
-	private T target;
+	private Object target;
 
-	public AbstractDynamicProxy(T target) {
+	public AbstractDynamicProxy(Object target) {
 		this.target = target;
 	}
 
-	@SuppressWarnings("unchecked")
-	public T getProxy() {
+	public Object getProxy() {
 
 		Object proxy = Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(),
 				this);
 
-		return (T) proxy;
+		return proxy;
 	}
 
 	@Override

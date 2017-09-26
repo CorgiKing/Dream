@@ -1,8 +1,8 @@
-package org.corgiking.design.proxy.dynamic_proxy;
+package org.corgiking.design.proxy.dynamic_proxy_jdk;
 
-public class DynamicProxy<T> extends AbstractDynamicProxy<T> {
+public class DynamicProxy extends AbstractDynamicProxy {
 
-	public DynamicProxy(T target) {
+	public DynamicProxy(Object target) {
 		super(target);
 	}
 

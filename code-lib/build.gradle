@@ -31,6 +31,12 @@ dependencies {
     //excel
     compile group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
     
+    //类动态代理
+    compile group: 'cglib', name: 'cglib', version: '3.2.5'
+    
+    //redis
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+    
 }
 
 test {

@@ -44,6 +44,12 @@ public class CKLogger {
 		}
 	}
 	
-	
+	public void info(String... msgs){
+		StringBuilder sb = new StringBuilder();
+		for(String msg:msgs){
+			sb.append(msg);
+		}
+		info(sb.toString());
+	}
 	
 }

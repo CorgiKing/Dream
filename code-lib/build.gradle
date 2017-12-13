@@ -40,6 +40,9 @@ dependencies {
     //activemq
     compile group: 'org.apache.activemq', name: 'activemq-all', version: '5.15.2'
     
+    //FTP
+    compile group: 'commons-net', name: 'commons-net', version: '3.6'
+    
 }
 
 test {

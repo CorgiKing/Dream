@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 扫描指定包下的类返回类名
  * @author Administrator
@@ -17,7 +20,7 @@ import java.util.jar.JarFile;
  */
 public class PackageScanner {
 
-	private CKLogger log = CKLogger.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(PackageScanner.class);
 
 	private List<String> classNames;
 
@@ -38,7 +41,7 @@ public class PackageScanner {
 
 		ScanFromFile(basePackage);
 
-		log.info("扫描到的类:", classNames);
+		log.info("扫描到的类:{}", classNames);
 		return classNames;
 	}
 
@@ -56,7 +59,7 @@ public class PackageScanner {
 
 					JarFile jarFile = con.getJarFile();
 					if (jarFile != null) {
-						log.info("扫描" + jarFile.getName());
+						log.info("扫描{}",jarFile.getName());
 						Enumeration<JarEntry> entries = jarFile.entries();
 
 						while (entries.hasMoreElements()) {
@@ -79,7 +82,7 @@ public class PackageScanner {
 		URL url = this.getClass().getResource("/" + basePackage.replace('.', '/'));
 		if (url != null && "file".equalsIgnoreCase(url.getProtocol())) {
 			String scanPath = url.getPath();
-			log.info(StringFormat.strcat("扫描 :", scanPath));
+			log.info("扫描 :", scanPath);
 
 			scanFromPath(new File(scanPath));
 		}
@@ -108,5 +111,8 @@ public class PackageScanner {
 	public static void main(String[] args) {
 		PackageScanner scanner = new PackageScanner();
 		List<String> classNames = scanner.scanning("org.corgiking");
+		for(String name:classNames){
+			System.out.println(name);
+		}
 	}
 }

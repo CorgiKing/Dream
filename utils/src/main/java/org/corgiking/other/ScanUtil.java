@@ -1,4 +1,4 @@
-package org.corgiking.scanner;
+package org.corgiking.other;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,13 +40,13 @@ public class ScanUtil {
 
 		String protocol = url.getProtocol();
 		if ("jar".equalsIgnoreCase(protocol)) {
-			log.info(StringFormat.strcat("从Jar包中扫描类：", filePath));
+			log.info(StringUtil.strcat("从Jar包中扫描类：", filePath));
 			classNames = readFromJarFile(filePath, packageDirName);
 		} else if ("war".equalsIgnoreCase(protocol)) {
-			log.info(StringFormat.strcat("从War包中扫描类：", filePath));
+			log.info(StringUtil.strcat("从War包中扫描类：", filePath));
 			throw new RuntimeException(filePath + "是个war包");
 		} else {
-			log.info(StringFormat.strcat("从目录中扫描类：", filePath));
+			log.info(StringUtil.strcat("从目录中扫描类：", filePath));
 			classNames = readFromDirFile(filePath);
 		}
 		log.info("读取类名: ", classNames);
@@ -70,12 +70,12 @@ public class ScanUtil {
 		}
 		for (String str : names) {
 			if (str.endsWith(".class")) {// 是个类
-				classNames.add(StringFormat.strcat(packageName, ".", str));
+				classNames.add(StringUtil.strcat(packageName, ".", str));
 			} else {
-				File file = new File(StringFormat.strcat(path, SEPARATOR, str));
+				File file = new File(StringUtil.strcat(path, SEPARATOR, str));
 				boolean b = file.isDirectory();
 				if (b) {
-					readFromDirFile(StringFormat.strcat(path, "/", str), StringFormat.strcat(packageName, ".", str));
+					readFromDirFile(StringUtil.strcat(path, "/", str), StringUtil.strcat(packageName, ".", str));
 				}
 			}
 		}

@@ -1,4 +1,4 @@
-package org.corgiking.scanner;
+package org.corgiking.other;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

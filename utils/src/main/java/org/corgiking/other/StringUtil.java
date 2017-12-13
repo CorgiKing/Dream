@@ -1,6 +1,6 @@
-package org.corgiking.scanner;
+package org.corgiking.other;
 
-public class StringFormat {
+public class StringUtil {
 
 	public static String strcat(String... strs) {
 		StringBuilder strBuilder = new StringBuilder();
@@ -17,7 +17,7 @@ public class StringFormat {
 			public void run() {
 				int i = 0;
 				while (++i < 10000) {
-					String str = StringFormat.strcat("Corgi", " King");
+					String str = StringUtil.strcat("Corgi", " King");
 					System.out.println(str);
 				}
 			};
@@ -27,7 +27,7 @@ public class StringFormat {
 			public void run() {
 				int i = 0;
 				while (++i < 10000) {
-					String str = StringFormat.strcat("Corgi", " King");
+					String str = StringUtil.strcat("Corgi", " King");
 					System.out.println(str);
 				}
 			};

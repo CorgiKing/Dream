@@ -21,7 +21,10 @@ dependencies {
 		
 		//PropertiesUtil
 		[group: 'org.apache.commons', name: 'commons-configuration2', version: '2.2'],
-		[group: 'commons-configuration', name: 'commons-configuration', version: '1.10']
+		[group: 'commons-configuration', name: 'commons-configuration', version: '1.10'],
+		
+		//FTPUtil
+		[group: 'commons-net', name: 'commons-net', version: '3.6']
 	)
 }
 

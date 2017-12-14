@@ -38,7 +38,7 @@ public class PackageScanner {
 			log.info("扫描Jar文件出错！");
 		}
 
-		classNames.addAll(scanFromSourceFile(basePackage));
+		classNames.addAll(scanFromSourceFolder(basePackage));
 
 		log.trace("扫描到的类:{}", classNames);
 		return classNames;
@@ -51,7 +51,7 @@ public class PackageScanner {
 	 * @throws IOException
 	 */
 	public static List<String> scanFromDependencies(String basePackage) throws IOException {
-		Enumeration<URL> resource = PackageScanner.class.getClass().getClassLoader().getResources(basePackage.replace(".", "/"));
+		Enumeration<URL> resource = PackageScanner.class.getClassLoader().getResources(basePackage.replace(".", "/"));
 		List<String> classNames = new ArrayList<>();
 		while (resource.hasMoreElements()) {
 			URL url = resource.nextElement();
@@ -91,7 +91,7 @@ public class PackageScanner {
 	 * @param basePackage
 	 * @return
 	 */
-	public static List<String> scanFromSourceFile(String basePackage) {
+	public static List<String> scanFromSourceFolder(String basePackage) {
 		URL url = PackageScanner.class.getResource("/" + basePackage.replace('.', '/'));
 		List<String> classNames = new ArrayList<>();
 		if (url != null && "file".equalsIgnoreCase(url.getProtocol())) {
@@ -153,9 +153,10 @@ public class PackageScanner {
 	}
 	
 	public static void main(String[] args) {
-		List<String> classNames = PackageScanner.scanSourceFileAndDependencies("org.apache");
-		for(String name:classNames){
-			System.out.println(name);
-		}
+		List<String> classNames = PackageScanner.scanSourceFileAndDependencies("org.corgiking");
+		System.out.println("类数量:"+classNames.size());
+//		for(String name:classNames){
+//			System.out.println(name);
+//		}
 	}
 }

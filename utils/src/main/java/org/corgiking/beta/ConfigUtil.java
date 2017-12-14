@@ -12,9 +12,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 
 public class ConfigUtil {
+	private static final Logger LOG = LoggerFactory.getLogger(ConfigUtil.class);
     private static final String CONFIG_FILE = "config";
-
-    private static final Logger LOG = LoggerFactory.getLogger(ConfigUtil.class);
     private static Configuration configuration = loadConfiguration();
 
     private ConfigUtil() {

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 扫描指定包下的类返回类名
+ * 
  * @author CorgiKing
  *
  */
@@ -26,78 +27,57 @@ public class PackageScanner {
 
 	/**
 	 * 从资源文件和依赖Jar中获取类名
+	 * 
 	 * @param basePackage
 	 * @return
 	 */
-	public static List<String> scanSourceFileAndDependencies(String basePackage) {
-		List<String> classNames = new ArrayList<>();
-		try {
-			classNames.addAll(scanFromDependencies(basePackage));
-		} catch (IOException e) {
-			e.printStackTrace();
-			log.info("扫描Jar文件出错！");
+	public static List<String> scanSourceFolderAndDependencies(String basePackage) {
+		Enumeration<URL> resource = getResources(basePackage);
+		if (resource == null) {
+			return null;
 		}
-
-		classNames.addAll(scanFromSourceFolder(basePackage));
-
-		log.trace("扫描到的类:{}", classNames);
+		List<String> classNames = new ArrayList<>();
+		while (resource.hasMoreElements()) {
+			URL url = resource.nextElement();
+			scanSourceFolder(basePackage, classNames, url);
+			scanJarFile(basePackage, classNames, url);
+		}
 		return classNames;
 	}
 
 	/**
 	 * 从依赖Jar中查找类名
+	 * 
 	 * @param basePackage
 	 * @return
 	 * @throws IOException
 	 */
-	public static List<String> scanFromDependencies(String basePackage) throws IOException {
-		Enumeration<URL> resource = PackageScanner.class.getClassLoader().getResources(basePackage.replace(".", "/"));
+	public static List<String> scanDependencies(String basePackage) {
+		Enumeration<URL> resource = getResources(basePackage);
+		if (resource == null) {
+			return null;
+		}
 		List<String> classNames = new ArrayList<>();
 		while (resource.hasMoreElements()) {
 			URL url = resource.nextElement();
-
-			String protocol = url.getProtocol();
-			if ("jar".equalsIgnoreCase(protocol)) {
-
-				JarURLConnection con = (JarURLConnection) url.openConnection();
-
-				if (con != null) {
-
-					JarFile jarFile = con.getJarFile();
-					if (jarFile != null) {
-						log.trace("扫描{}",jarFile.getName());
-						Enumeration<JarEntry> entries = jarFile.entries();
-
-						while (entries.hasMoreElements()) {
-							JarEntry jarEntry = entries.nextElement();
-							// org/corgiking/CKLogger.class
-							String name = jarEntry.getName();
-							if (name.endsWith(".class") && name.startsWith(basePackage.replace('.', '/'))) {
-								classNames.add(name.substring(0, name.lastIndexOf('.')).replace('/', '.'));
-							}
-
-						}
-					}
-				}
-
-			}
-
+			scanJarFile(basePackage, classNames, url);
 		}
 		return classNames;
 	}
 
 	/**
 	 * 从资源文件中获取类名
+	 * 
 	 * @param basePackage
 	 * @return
 	 */
-	public static List<String> scanFromSourceFolder(String basePackage) {
+	public static List<String> scanSourceFolder(String basePackage) {
 		URL url = PackageScanner.class.getResource("/" + basePackage.replace('.', '/'));
 		List<String> classNames = new ArrayList<>();
 		if (url != null && "file".equalsIgnoreCase(url.getProtocol())) {
 			String scanPath = url.getPath();
 			log.trace("扫描 :{}", scanPath);
-			scanFromDir(new File(scanPath),basePackage,classNames);
+			scanDir(new File(scanPath), basePackage, classNames);
 			return classNames;
 		}
 		return classNames;
@@ -105,23 +85,25 @@ public class PackageScanner {
 
 	/**
 	 * 从目录中查找类名
+	 * 
 	 * @param dir
 	 * @param basePackage
 	 * @return
 	 */
-	public static List<String> scanFromDir(File dir,String basePackage){
+	public static List<String> scanDir(File dir, String basePackage) {
 		List<String> classNames = new ArrayList<>();
-		scanFromDir(dir, basePackage, classNames);
+		scanDir(dir, basePackage, classNames);
 		return classNames;
 	}
-	
+
 	/**
 	 * 获取class文件类名
+	 * 
 	 * @param file
 	 * @param basePackage
 	 * @return
 	 */
-	public static String scanFromFile(File classFile,String basePackage){
+	private static String scanFile(File classFile, String basePackage) {
 		if (classFile.getName().endsWith(".class")) {
 			String name = classFile.getPath().replace(File.separatorChar, '.');
 			int s = name.lastIndexOf(basePackage);
@@ -131,32 +113,77 @@ public class PackageScanner {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 从目录中查找类名
+	 * 
 	 * @param file
 	 * @param basePackage
 	 * @param classNames
 	 */
-	private static void scanFromDir(File dir,String basePackage,List<String> classNames) {
+	private static void scanDir(File dir, String basePackage, List<String> classNames) {
 		if (dir.isDirectory()) {
 			File[] files = dir.listFiles();
 			for (File f : files) {
-				scanFromDir(f,basePackage,classNames);
+				scanDir(f, basePackage, classNames);
 			}
 		} else {
-			String className = scanFromFile(dir, basePackage);
-			if (className!=null) {
+			String className = scanFile(dir, basePackage);
+			if (className != null) {
 				classNames.add(className);
 			}
 		}
 	}
 	
+	private static void scanJarFile(String basePackage, List<String> classNames, URL url) {
+		String protocol = url.getProtocol();
+		if ("jar".equalsIgnoreCase(protocol)) {
+			try {
+				JarURLConnection con = (JarURLConnection) url.openConnection();
+				if (con != null) {
+					JarFile jarFile = con.getJarFile();
+					if (jarFile != null) {
+						log.trace("扫描{}", jarFile.getName());
+						Enumeration<JarEntry> entries = jarFile.entries();
+						while (entries.hasMoreElements()) {
+							JarEntry jarEntry = entries.nextElement();
+							// org/corgiking/CKLogger.class
+							String name = jarEntry.getName();
+							if (name.endsWith(".class") && name.startsWith(basePackage.replace('.', '/'))) {
+								classNames.add(name.substring(0, name.lastIndexOf('.')).replace('/', '.'));
+							}
+						}
+					}
+				}
+			} catch (IOException e) {
+				log.error("扫描Jar文件出错!Jar-{},Error-{}", url, e.getMessage());
+			}
+		}
+	}
+	
+	private static void scanSourceFolder(String basePackage, List<String> classNames, URL url) {
+		String protocol = url.getProtocol();
+		if ("file".equalsIgnoreCase(protocol)) {
+			String scanPath = url.getPath();
+			log.trace("扫描 :{}", scanPath);
+			scanDir(new File(scanPath), basePackage, classNames);
+		}
+	}
+	
+	private static Enumeration<URL> getResources(String basePackage) {
+		try {
+			return PackageScanner.class.getClassLoader().getResources(basePackage.replace(".", "/"));
+		} catch (IOException e) {
+			log.error("Get resources error. basePackage:{}. Error message:{}", basePackage, e.getMessage());
+			return null;
+		}
+	}
+
 	public static void main(String[] args) {
-		List<String> classNames = PackageScanner.scanSourceFileAndDependencies("org.corgiking");
-		System.out.println("类数量:"+classNames.size());
-//		for(String name:classNames){
-//			System.out.println(name);
-//		}
+		List<String> classNames = PackageScanner.scanDependencies("org.corgiking");
+		System.out.println("类数量:" + classNames.size());
+		 for(String name:classNames){
+		 System.out.println(name);
+		 }
 	}
 }

@@ -1,4 +1,4 @@
-package org.corgiking.beta;
+package org.corgiking.release;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,10 +34,11 @@ public class FTPUtil {
 			log.error("ftp Reply not positive :IP-{},PORT-{},NAME-{},PWD-{}", ip, port, name, pwd);
 			return null;
 		}
+		ftpUtil.prepare();
 		return ftpUtil;
 	}
 
-	public boolean prepare() {
+	private boolean prepare() {
 		client.setBufferSize(2048);
 		client.setControlEncoding("utf-8");
 		try {

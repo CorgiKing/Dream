@@ -1,4 +1,4 @@
-package org.corgiking.beta;
+package org.corgiking.other;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package org.corgiking.beta;
+package org.corgiking.release;
 
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
@@ -17,16 +17,6 @@ public class ConfigUtil {
     private static Configuration configuration = loadConfiguration();
 
     private ConfigUtil() {
-    }
-
-    // for testing purpose only
-    public static void setConfiguration(Configuration configuration) {
-        ConfigUtil.configuration = configuration;
-    }
-
-    // for testing purpose only
-    public static Configuration getConfiguration() {
-        return configuration;
     }
 
     private static Configuration loadConfiguration() {
@@ -68,5 +58,9 @@ public class ConfigUtil {
 
     public static int getInt(String key) {
         return configuration.getInt(key, 0);
+    }
+    
+    public static float getFloat(String key){
+    	return configuration.getFloat(key);
     }
 }

@@ -1,4 +1,4 @@
-package org.corgiking.design.proxy.dynamic_proxy_cglib;
+package org.corgiking.design.proxy.cglib;
 
 import org.corgiking.design.proxy.static_proxy.DellComputer;
 

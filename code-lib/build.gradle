@@ -49,6 +49,9 @@ dependencies {
     //FTP
     compile group: 'commons-net', name: 'commons-net', version: '3.6'
     
+    //Orika
+    compile group: 'ma.glasnost.orika', name: 'orika-core', version: '1.5.2'
+    
 }
 
 test {

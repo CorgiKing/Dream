@@ -3,7 +3,7 @@ package org.corgiking.util;
 public class ByteArrayUtil {
 
 	/**
-	 * ÔÚdestÊı×éºó×·¼ÓlengthµÄÊı¾İ
+	 * åœ¨destæ•°ç»„åè¿½åŠ lengthçš„æ•°æ®
 	 * 
 	 * @param src
 	 * @param srcPos
@@ -19,8 +19,8 @@ public class ByteArrayUtil {
 		if (dest != null) {
 			byte[] buf = new byte[dest.length + length];
 			System.arraycopy(dest, 0, buf, 0, dest.length);
-			dest = buf;
 			destPos = dest.length;
+			dest = buf;
 		} else {
 			dest = new byte[length];
 		}
@@ -29,7 +29,7 @@ public class ByteArrayUtil {
 	}
 
 	/**
-	 * ÔÚdestÊı×é´ÓdestPos¿ªÊ¼Ìí¼ÓlengthµÄÊı¾İ
+	 * åœ¨destæ•°ç»„ä»destPoså¼€å§‹æ·»åŠ lengthçš„æ•°æ®
 	 * 
 	 * @param src
 	 * @param srcPos

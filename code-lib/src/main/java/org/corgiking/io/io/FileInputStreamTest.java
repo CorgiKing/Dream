@@ -17,7 +17,7 @@ public class FileInputStreamTest {
 			int byteRead = is.read(buf);
 			byte[] ret = new byte[0];
 			while (byteRead != -1) {
-				ret = ByteArrayUtil.appendArray(buf, 0, ret, buf.length);
+				ret = ByteArrayUtil.appendArray(buf, 0, ret, byteRead);
 				byteRead = is.read(buf);
 			}
 			System.out.println(new String(ret));

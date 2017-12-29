@@ -1,5 +1,6 @@
 package org.corgiking.io.nio;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
@@ -8,6 +9,8 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
+
+import org.corgiking.util.ByteArrayUtil;
 
 public class ServerSocketChannelTest {
 
@@ -49,7 +52,7 @@ public class ServerSocketChannelTest {
 		
 	}
 
-	private static void handleAccept(SelectionKey key) throws Exception {
+	private static void handleAccept(SelectionKey key) throws IOException {
 		ServerSocketChannel ssChannel = (ServerSocketChannel)key.channel();
         SocketChannel sc = ssChannel.accept();
         if (sc != null) {
@@ -58,14 +61,30 @@ public class ServerSocketChannelTest {
 		}
 	}
 
-	private static void handleRead(SelectionKey key) {
-		// TODO Auto-generated method stub
+	private static void handleRead(SelectionKey key) throws IOException {
+		SocketChannel channel = (SocketChannel) key.channel();
+		ByteBuffer buf = (ByteBuffer) key.attachment();
 		
+		int bytesRead = channel.read(buf);
+		byte[] ret = new byte[0];
+		while(bytesRead != -1){
+			buf.flip();
+			
+			ret = ByteArrayUtil.appendArray(buf.array(), 0, ret, bytesRead);
+			bytesRead = channel.read(buf);
+		}
+		System.out.println(new String(ret));
 	}
 
-	private static void handleWrite(SelectionKey key) {
-		// TODO Auto-generated method stub
+	private static void handleWrite(SelectionKey key) throws IOException {
+		ByteBuffer buf = (ByteBuffer)key.attachment();
+		SocketChannel sc = (SocketChannel) key.channel();
 		
+        buf.flip();
+        while(buf.hasRemaining()){
+            sc.write(buf);
+        }
+        buf.compact();
 	}
 
 }

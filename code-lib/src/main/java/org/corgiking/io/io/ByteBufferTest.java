@@ -7,7 +7,7 @@ import java.nio.channels.FileChannel;
 public class ByteBufferTest {
 
 	public static void main(String[] args) throws Exception {
-		RandomAccessFile raFile = new RandomAccessFile("src/main/resources/demo.txt", "rw");
+		RandomAccessFile raFile = new RandomAccessFile("src/main/resources/redis.txt", "rw");
 		FileChannel channel = raFile.getChannel();
 
 		long s = System.currentTimeMillis();

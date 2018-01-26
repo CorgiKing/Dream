@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.Era;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-
-import jxl.write.DateTime;
 
 public class LocalDateTest {
 

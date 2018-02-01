@@ -1,6 +1,5 @@
 package org.corgiking.email;
 
-import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;

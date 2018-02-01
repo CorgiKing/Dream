@@ -1,6 +1,5 @@
 package org.corgiking.design.factory.abstractfactory;
 
-import org.corgiking.design.factory.product.Computer;
 import org.corgiking.design.factory.product.Keyboard;
 import org.corgiking.design.factory.product.LenovoComputer;
 import org.corgiking.design.factory.product.LenovoKeyboard;

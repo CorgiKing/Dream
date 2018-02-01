@@ -1,7 +1,5 @@
 package org.corgiking.email;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 

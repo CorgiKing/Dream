@@ -58,6 +58,9 @@ dependencies {
     
     //邮件
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+    
+    //序列化
+    compile group: 'com.esotericsoftware', name: 'kryo', version: '4.0.2'
 }
 
 test {

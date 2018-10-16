@@ -1,4 +1,4 @@
-package org.corgiking.serialize;
+package org.corgiking.serialize.kryo;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -28,7 +28,7 @@ public class EchoNioClient {
                  }
              });
 
-            ChannelFuture f = b.connect().sync();        
+            ChannelFuture f = b.connect().sync();
 
             f.channel().closeFuture().sync();            
         } finally {

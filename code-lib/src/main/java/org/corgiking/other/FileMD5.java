@@ -22,6 +22,8 @@ public class FileMD5 {
 			msgDigest.update(buf, 0, len);
 		}
 		
+		fis.close();
+		
 		return new BigInteger(1, msgDigest.digest()).toString(16);
 		
 	}

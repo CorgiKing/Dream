@@ -6,11 +6,20 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
-
 public class ParamTypeUtil {
+	
+	/**
+	 * 获取泛型类对象obj的实际类型
+	 * @param object
+	 * @param parametrizedSuperclass
+	 * @return
+	 */
+//	public Type findType(final Object obj, Class<?> parametrizedSuperclass) {
+//		
+//	}
 
 	/**
-	 * 获取泛型的实际类型
+	 * 获取泛型类的某个泛型的实际类
 	 * @param object 泛型类子类对象
 	 * @param parametrizedSuperclass 泛型类
 	 * @param typeParamName 泛型名称

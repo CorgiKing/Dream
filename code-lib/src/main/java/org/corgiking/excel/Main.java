@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		String filename = "C:/Users/SONGJC/Desktop/users.xls";
+		String filename = "d:/test.xls";
 		
 		ReadExcel readExcel = new ReadExcel();
 		

@@ -7,6 +7,8 @@ package org.corgiking.excel;
  * poi的Event API操作大excel
  * http://poi.apache.org/components/spreadsheet/how-to.html#xssf_sax_api
  * 
+ * 阿里开源的easyexcel
+ * 
  * @author viruser
  *
  */

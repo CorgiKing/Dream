@@ -3,6 +3,14 @@ package org.corgiking.io;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 
+/**
+ * mark 对一个position进行标记，便于下次返回到该position
+ * position 当前位置
+ * limit 读/写不能超过的下标位置，
+ * capacity buf的容量
+ *
+ * 0 <= mark <= position <= limit <= capacity
+ */
 public class BufferTest {
 
 	public static void main(String[] args) {
@@ -51,12 +59,11 @@ public class BufferTest {
 		//position=2, limit=10, capacity=10
 		buf.reset();
 		
-		//position设为0
+		//position设为0，limit不变，一般在把数据重写入Buffer前调用。
 		//position=0, limit=10, capacity=10
 		buf.rewind();
-		
-		
-		
+
+
 		System.out.println(MessageFormat.format("position={0}, limit={1}, capacity={2}",buf.position(),buf.limit(),buf.capacity()));
 	}
 
